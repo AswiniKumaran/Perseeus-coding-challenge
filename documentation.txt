@@ -1,0 +1,29 @@
+Container : Docker
+Language: python
+DB : Postgres
+
+Created a django project using the below command:
+django-admin startproject user_service
+
+Once the project has been created use the below command to bring the server up
+docker-compose up
+The command I have given in docker-compose file is:
+python manage.py runserver -> which brings the server up
+
+Check for the local host in chrome, once the server is brought up
+To create a app, the command is
+docker-compose run web python manage.py startapp user_data
+
+Created the models as per problem description.
+To migrate those models the below commands are given
+docker-compose run web python manage.py makemigrations(only if there is a schema change)
+docker-compose run web python manage.py migrate
+
+Create a superuser credentials for admin:
+docker-compose run web python manage.py createsuperuser
+Register those models in admin.py to add the data through admin
+
+Try adding sample datas through admin to test the functionality
+Create modelserializers for models, to access through api
+Add urls for api
+Use the inbuilt genericviewsin views to display the data

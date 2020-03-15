@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+  web:
+    build: .
+    depends_on:
+      - postgres
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    command: bash -c "python manage.py runserver 0.0.0.0:8000"
+
+    # ports:
+    #   # - "8000"
+    #   # - "8000:8000"
+    #   - "127.0.0.1:8000:8000"
